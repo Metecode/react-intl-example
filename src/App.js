@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useContext } from "react";
+import { GlobalContext } from "./utils/GlobalContext";
+import { Box, IconButton, Typography } from "@mui/material";
+import { useIntl } from "react-intl";
 
 function App() {
+  const { locale, changeLocale } = useContext(GlobalContext);
+  const { $t: t } = useIntl();
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box mx={2}>
+      <IconButton onClick={() => changeLocale(locale === "tr" ? "en" : "tr")}>
+        {locale === "en" ? "EN" : "TR"}
+      </IconButton>
+      <Typography>{t({ id: "welcome" })}</Typography>
+      <Typography>{t({ id: "hello" })}</Typography>
+    </Box>
   );
 }
 
